@@ -26,6 +26,7 @@
 	..()
 
 /obj/machinery/atmospherics/unary/heater/Initialize()
+	..()
 	if(node)
 		return
 

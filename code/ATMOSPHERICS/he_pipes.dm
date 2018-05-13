@@ -132,6 +132,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/New()
 	// BubbleWrap END
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/Initialize()
+	..()
 	for(var/obj/machinery/atmospherics/target in get_step(src, initialize_directions))
 		if(target.initialize_directions & get_dir(target, src))
 			node1 = target

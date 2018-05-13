@@ -270,6 +270,7 @@
 	return
 
 /obj/machinery/atmospherics/pipe/simple/Initialize()
+	..()
 	normalize_dir()
 	var/node1_dir
 	var/node2_dir
@@ -538,6 +539,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold/Initialize()
+	..()
 	var/connect_directions = (NORTH|SOUTH|EAST|WEST)&(~dir)
 
 	for(var/direction in cardinal)
@@ -808,6 +810,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold4w/Initialize()
+	..()
 
 	for(var/obj/machinery/atmospherics/target in get_step(src, 1))
 		if(target.initialize_directions & 2)
@@ -1261,6 +1264,7 @@
 		icon_state = "exposed"
 
 /obj/machinery/atmospherics/pipe/vent/Initialize()
+	..()
 	var/connect_direction = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src, connect_direction))

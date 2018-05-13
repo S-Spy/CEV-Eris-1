@@ -242,6 +242,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/omni/Initialize()
+	..()
 	for(var/datum/omni_port/P in ports)
 		if(P.node || P.mode == 0)
 			continue

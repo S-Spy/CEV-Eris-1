@@ -27,6 +27,7 @@
 /obj/machinery/atmospherics/unary/freezer/Initialize()
 	if(node)
 		return
+	..()
 
 	var/node_connect = dir
 

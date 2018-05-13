@@ -34,6 +34,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/Initialize()
+	..()
 	if(node) return
 	var/node_connect = dir
 	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))

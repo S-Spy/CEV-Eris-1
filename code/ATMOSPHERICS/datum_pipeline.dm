@@ -9,9 +9,12 @@ datum/pipeline
 
 	var/alert_pressure = 0
 
+	New()
+		START_PROCESSING(SSprocessing, src)
+
 	Destroy()
-		if(network)
-			qdel(network)
+		STOP_PROCESSING(SSprocessing, src)
+		QDEL_NULL(network)
 
 		if(air && air.volume)
 			temporarily_store_air()

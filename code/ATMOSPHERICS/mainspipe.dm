@@ -102,6 +102,7 @@ obj/machinery/atmospherics/mains_pipe
 		. = ..()
 
 	Initialize()
+		. = ..()
 		for(var/i = 1 to nodes.len)
 			var/obj/machinery/atmospherics/mains_pipe/node = nodes[i]
 			if(node)

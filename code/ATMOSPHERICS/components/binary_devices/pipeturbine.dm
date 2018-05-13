@@ -159,6 +159,7 @@
 
 	Initialize()
 		if(node1 && node2) return
+		..()
 
 		var/node2_connect = turn(dir, -90)
 		var/node1_connect = turn(dir, 90)
