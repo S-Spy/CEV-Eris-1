@@ -113,8 +113,6 @@ var/list/name_to_material
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/created_window
-	var/rod_product
-	var/wire_product
 	var/list/window_options = list()
 
 	// Damage values.
@@ -130,35 +128,6 @@ var/list/name_to_material
 	var/stack_type
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
-
-// Placeholders for light tiles and rglass.
-/material/proc/build_rod_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
-	if(!rod_product)
-		user << SPAN_WARNING("You cannot make anything out of \the [target_stack]")
-		return
-	if(used_stack.get_amount() < 1 || target_stack.get_amount() < 1)
-		user << SPAN_WARNING("You need one rod and one sheet of [display_name] to make anything useful.")
-		return
-	used_stack.use(1)
-	target_stack.use(1)
-	var/obj/item/stack/S = new rod_product(get_turf(user))
-	S.add_fingerprint(user)
-	S.add_to_stacks(user)
-
-/material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
-	if(!wire_product)
-		user << SPAN_WARNING("You cannot make anything out of \the [target_stack]")
-		return
-	if(used_stack.get_amount() < 5 || target_stack.get_amount() < 1)
-		user << SPAN_WARNING("You need five wires and one sheet of [display_name] to make anything useful.")
-		return
-
-	used_stack.use(5)
-	target_stack.use(1)
-	user << SPAN_NOTICE("You attach wire to the [name].")
-	var/obj/item/product = new wire_product(get_turf(user))
-	if(!(user.l_hand && user.r_hand))
-		user.put_in_hands(product)
 
 // Make sure we have a display name and shard icon even if they aren't explicitly set.
 /material/New()
@@ -365,12 +334,11 @@ var/list/name_to_material
 	integrity = 100
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 30
+	hardness = 40
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
-	window_options = list("One Direction" = 1, "Full Window" = 4)
+	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	created_window = /obj/structure/window/basic
-	rod_product = /obj/item/stack/material/glass/reinforced
 	hitsound = 'sound/effects/Glasshit.ogg'
 
 /material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
@@ -416,8 +384,8 @@ var/list/name_to_material
 			else
 				failed_to_build = 1
 			if(!failed_to_build && choice == "Windoor")
-				if(!is_reinforced())
-					user << SPAN_WARNING("This material is not reinforced enough to use for a door.")
+				if(type != /material/glass)
+					user << SPAN_WARNING("You can't use this material for a door.")
 					return
 				if((locate(/obj/structure/windoor_assembly) in T.contents) || (locate(/obj/machinery/door/window) in T.contents))
 					failed_to_build = 1
@@ -441,27 +409,6 @@ var/list/name_to_material
 	new build_path(T, build_dir, 1)
 	return 1
 
-/material/glass/proc/is_reinforced()
-	return (hardness > 35) //todo
-
-/material/glass/reinforced
-	name = "rglass"
-	display_name = "reinforced glass"
-	stack_type = /obj/item/stack/material/glass/reinforced
-	flags = MATERIAL_BRITTLE
-	icon_colour = "#00E1FF"
-	opacity = 0.3
-	integrity = 100
-	shard_type = SHARD_SHARD
-	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 40
-	stack_origin_tech = "materials=2"
-	composite_material = list(MATERIAL_STEEL = 2,MATERIAL_GLASS = 3)
-	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
-	created_window = /obj/structure/window/reinforced
-	wire_product = null
-	rod_product = null
-
 /material/glass/plasma
 	name = "borosilicate glass"
 	display_name = "borosilicate glass"
@@ -470,21 +417,8 @@ var/list/name_to_material
 	integrity = 100
 	icon_colour = "#FC2BC5"
 	stack_origin_tech = list(TECH_MATERIAL = 4)
+	window_options = list("One Direction" = 1, "Full Window" = 4)
 	created_window = /obj/structure/window/plasmabasic
-	wire_product = null
-	rod_product = /obj/item/stack/material/glass/plasmarglass
-
-/material/glass/plasma/reinforced
-	name = "reinforced borosilicate glass"
-	display_name = "reinforced borosilicate glass"
-	stack_type = /obj/item/stack/material/glass/plasmarglass
-	stack_origin_tech = list(TECH_MATERIAL = 5)
-	composite_material = list() //todo
-	created_window = /obj/structure/window/reinforced/plasma
-	hardness = 40
-	//stack_origin_tech = list(TECH_MATERIAL = 2)
-	//composite_material = list() //todo
-	rod_product = null
 
 /material/plastic
 	name = "plastic"

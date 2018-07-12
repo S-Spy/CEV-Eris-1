@@ -84,12 +84,6 @@
 	message = "of plasteel"
 	export_types = list(/obj/item/stack/material/plasteel)
 
-// Reinforced Glass. Common building material. 1 glass + 0.5 metal, cost is rounded up.
-/datum/export/stack/rglass
-	cost = 8
-	message = "of reinforced glass"
-	export_types = list(/obj/item/stack/material/glass/reinforced)
-
 // Wood. Quite expensive in the grim and dark 26 century.
 /datum/export/stack/wood
 	cost = 25

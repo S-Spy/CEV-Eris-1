@@ -312,10 +312,6 @@
 					if(material.icon_colour)
 						I.color = material.icon_colour
 					overlays += I
-					var/material/glass/G = material
-					if (G.is_reinforced())
-						I = image(icon, "rglass_[connections[i]]", dir = 1<<(i-1))
-						overlays += I
 
 			else if (istype(material, /material/wood))
 				for(var/i = 1 to 4)

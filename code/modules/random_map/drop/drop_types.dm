@@ -135,7 +135,6 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/stack/material/glass,
 		/obj/item/stack/material/wood,
 		/obj/item/stack/material/plastic,
-		/obj/item/stack/material/glass/reinforced,
 		/obj/item/stack/material/plasteel)
 
 /datum/supply_drop_loot/medical
@@ -168,7 +167,6 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/stack/material/glass,
 		/obj/item/stack/material/wood,
 		/obj/item/stack/material/plastic,
-		/obj/item/stack/material/glass/reinforced,
 		/obj/item/stack/material/plasteel)
 
 /datum/supply_drop_loot/hydroponics

@@ -214,7 +214,7 @@
 			else if(glass == 1)
 				if(I.use_tool(user, src, WORKTIME_NORMAL, tool_type, FAILCHANCE_NORMAL, required_stat = STAT_MEC))
 					user << SPAN_NOTICE("You welded the glass panel out!")
-					new /obj/item/stack/material/glass/reinforced(src.loc)
+					new /obj/item/stack/material/glass(src.loc)
 					glass = 0
 			else if(!anchored)
 				if(I.use_tool(user, src, WORKTIME_NORMAL, tool_type, FAILCHANCE_NORMAL, required_stat = STAT_MEC))
@@ -292,12 +292,12 @@
 		var/material_name = S.get_material_name()
 		if (S)
 			if (S.get_amount() >= 1)
-				if(material_name == MATERIAL_RGLASS)
+				if(material_name == MATERIAL_GLASS)
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 					user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
 					if(do_after(user, 40,src) && !glass)
 						if (S.use(1))
-							user << SPAN_NOTICE("You installed reinforced glass windows into the airlock assembly.")
+							user << SPAN_NOTICE("You installed glass windows into the airlock assembly.")
 							glass = 1
 				else if(material_name)
 					// Ugly hack, will suffice for now. Need to fix it upstream as well, may rewrite mineral walls. ~Z

@@ -14,7 +14,7 @@ var/list/solars_list = list()
 	idle_power_usage = 0
 	active_power_usage = 0
 	var/id = 0
-	var/health = 10
+	var/health = 20
 	var/obscured = 0
 	var/sunfrac = 0
 	var/adir = SOUTH // actual dir
@@ -53,8 +53,6 @@ var/list/solars_list = list()
 		S.glass_type = /obj/item/stack/material/glass
 		S.anchored = 1
 	S.loc = src
-	if(S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
-		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
 	update_icon()
 
 
@@ -249,7 +247,7 @@ var/list/solars_list = list()
 			return
 
 	if(anchored && !isturf(loc))
-		if(istype(I, /obj/item/stack/material) && (I.get_material_name() == "glass" || I.get_material_name() == "rglass"))
+		if(istype(I, /obj/item/stack/material) && (I.get_material_name() == MATERIAL_GLASS))
 			var/obj/item/stack/material/S = I
 			if(S.use(2))
 				glass_type = I.type

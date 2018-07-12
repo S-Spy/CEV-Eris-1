@@ -241,7 +241,6 @@
 			possible_spawns += /obj/item/stack/material/steel
 			possible_spawns += /obj/item/stack/material/plasteel
 			possible_spawns += /obj/item/stack/material/glass
-			possible_spawns += /obj/item/stack/material/glass/reinforced
 			possible_spawns += /obj/item/stack/material/plasma
 			possible_spawns += /obj/item/stack/material/gold
 			possible_spawns += /obj/item/stack/material/silver

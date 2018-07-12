@@ -13,7 +13,6 @@
 	var/health
 	var/ini_dir = null
 	var/state = 2
-	var/reinf = 0
 	var/basestate
 	var/shardtype = /obj/item/weapon/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
@@ -93,11 +92,9 @@
 		index = 0
 		while(index < 2)
 			new shardtype(loc) //todo pooling?
-			if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
 			index++
 	else
 		new shardtype(loc) //todo pooling?
-		if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
 	qdel(src)
 	return
 
@@ -159,8 +156,8 @@
 	else if(isobj(AM))
 		var/obj/item/I = AM
 		tforce = I.throwforce
-	if(reinf) tforce *= 0.25
-	if(health - tforce <= 7 && !reinf)
+	tforce *= 0.25
+	if(health - tforce <= 7)
 		set_anchored(FALSE)
 		step(src, get_dir(AM, src))
 	take_damage(tforce)
@@ -238,18 +235,17 @@
 /obj/structure/window/attackby(obj/item/I, mob/user)
 
 	var/list/usable_qualities = list()
-	if(!anchored && (!state || !reinf))
+	if(!anchored && !state)
 		usable_qualities.Add(QUALITY_BOLT_TURNING)
-	if((reinf && state >= 1) || (reinf && state == 0) || (!reinf))
-		usable_qualities.Add(QUALITY_SCREW_DRIVING)
-	if(reinf && state >= 1)
+	usable_qualities.Add(QUALITY_SCREW_DRIVING)
+	if(state >= 1)
 		usable_qualities.Add(QUALITY_PRYING)
 
 	var/tool_type = I.get_tool_type(user, usable_qualities)
 	switch(tool_type)
 
 		if(QUALITY_BOLT_TURNING)
-			if(!anchored && (!state || !reinf))
+			if(!anchored && !state)
 				if(!glasstype)
 					user << SPAN_NOTICE("You're not sure how to dismantle \the [src] properly.")
 					return
@@ -265,7 +261,7 @@
 			return
 
 		if(QUALITY_PRYING)
-			if(reinf && state <= 1)
+			if(state <= 1)
 				if(I.use_tool(user, src, WORKTIME_FAST, tool_type, FAILCHANCE_EASY, required_stat = STAT_MEC))
 					state = 1 - state
 					user << (state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame."))
@@ -273,21 +269,16 @@
 
 
 		if(QUALITY_SCREW_DRIVING)
-			if(reinf && state >= 1)
+			if(state >= 1)
 				if(I.use_tool(user, src, WORKTIME_NEAR_INSTANT, tool_type, FAILCHANCE_EASY, required_stat = STAT_MEC))
 					state = 3 - state
 					update_nearby_icons()
 					user << (state == 1 ? SPAN_NOTICE("You have unfastened the window from the frame.") : SPAN_NOTICE("You have fastened the window to the frame."))
 					return
-			if(reinf && state == 0)
+			if(state == 0)
 				if(I.use_tool(user, src, WORKTIME_NEAR_INSTANT, tool_type, FAILCHANCE_EASY, required_stat = STAT_MEC))
 					set_anchored(!anchored)
 					user << (anchored ? SPAN_NOTICE("You have fastened the frame to the floor.") : SPAN_NOTICE("You have unfastened the frame from the floor."))
-					return
-			if(!reinf)
-				if(I.use_tool(user, src, WORKTIME_NEAR_INSTANT, tool_type, FAILCHANCE_VERY_EASY))
-					set_anchored(!anchored)
-					user << (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window."))
 					return
 			return
 
@@ -311,7 +302,6 @@
 	return
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
-	if(reinf) damage *= 0.5
 	take_damage(damage)
 	return
 
@@ -451,9 +441,9 @@
 	icon_state = "window"
 	basestate = "window"
 	glasstype = /obj/item/stack/material/glass
-	maximal_heat = T0C + 100
+	maximal_heat = T0C + 750
 	damage_per_fire_tick = 2.0
-	maxhealth = 60
+	maxhealth = 400 // reinforeced window merged into basic, also there was (damage * 0.5) so x2 HP to their value.
 
 /obj/structure/window/basic/full
 	dir = SOUTH|EAST
@@ -466,24 +456,13 @@
 	icon_state = "plasmawindow"
 	shardtype = /obj/item/weapon/shard/plasma
 	glasstype = /obj/item/stack/material/glass/plasmaglass
-	maximal_heat = T0C + 2000
+	maximal_heat = T0C + 9000
 	damage_per_fire_tick = 1.0
-	maxhealth = 300
+	maxhealth = 1200
 
 /obj/structure/window/plasmabasic/full
 	dir = SOUTH|EAST
 	icon_state = "plasmawindow_mask"
-
-/obj/structure/window/reinforced
-	name = "reinforced window"
-	desc = "It looks rather strong. Might take a few good hits to shatter it."
-	icon_state = "rwindow"
-	basestate = "rwindow"
-	maxhealth = 200
-	reinf = 1
-	maximal_heat = T0C + 750
-	damage_per_fire_tick = 2.0
-	glasstype = /obj/item/stack/material/glass/reinforced
 
 /obj/structure/window/New(Loc, constructed=0)
 	..()
@@ -492,38 +471,12 @@
 	if (constructed)
 		state = 0
 
-/obj/structure/window/reinforced/full
-	dir = SOUTH|EAST
-	icon_state = "fwindow"
-
-/obj/structure/window/reinforced/plasma
-	name = "reinforced borosilicate window"
-	desc = "A borosilicate alloy window, with rods supporting it. It seems to be very strong."
-	basestate = "plasmarwindow"
-	icon_state = "plasmarwindow"
-	shardtype = /obj/item/weapon/shard/plasma
-	glasstype = /obj/item/stack/material/glass/plasmarglass
-	maximal_heat = T0C + 9000
-	damage_per_fire_tick = 1.0 // This should last for 80 fire ticks if the window is not damaged at all. The idea is that borosilicate windows have something like ablative layer that protects them for a while.
-	maxhealth = 600
-
-/obj/structure/window/reinforced/plasma/full
-	dir = SOUTH|EAST
-	icon_state = "plasmarwindow_mask"
-
-/obj/structure/window/reinforced/tinted
+/obj/structure/window/tinted
 	name = "tinted window"
 	desc = "It looks rather strong and opaque. Might take a few good hits to shatter it."
 	icon_state = "twindow"
 	basestate = "twindow"
 	opacity = 1
-
-/obj/structure/window/reinforced/tinted/frosted
-	name = "frosted window"
-	desc = "It looks rather strong and frosted over. Looks like it might take a few less hits then a normal reinforced window."
-	icon_state = "fwindow"
-	basestate = "fwindow"
-	maxhealth = 250
 
 /obj/structure/window/shuttle
 	name = "shuttle window"
@@ -531,17 +484,16 @@
 	icon = 'icons/obj/podwindows.dmi'
 	icon_state = "window"
 	basestate = "window"
-	maxhealth = 800
-	reinf = 1
+	maxhealth = 1600
 	basestate = "w"
 	dir = 5
 
-/obj/structure/window/reinforced/polarized
+/obj/structure/window/polarized
 	name = "electrochromic window"
 	desc = "Adjusts its tint with voltage. Might take a few good hits to shatter it."
 	var/id
 
-/obj/structure/window/reinforced/polarized/proc/toggle()
+/obj/structure/window/polarized/proc/toggle()
 	if(opacity)
 		animate(src, color="#FFFFFF", time=5)
 		set_opacity(0)
@@ -549,22 +501,22 @@
 		animate(src, color="#222222", time=5)
 		set_opacity(1)
 
-/obj/structure/window/reinforced/crescent/attack_hand()
+/obj/structure/window/crescent/attack_hand()
 	return
 
-/obj/structure/window/reinforced/crescent/attackby()
+/obj/structure/window/crescent/attackby()
 	return
 
-/obj/structure/window/reinforced/crescent/ex_act()
+/obj/structure/window/crescent/ex_act()
 	return
 
-/obj/structure/window/reinforced/crescent/hitby()
+/obj/structure/window/crescent/hitby()
 	return
 
-/obj/structure/window/reinforced/crescent/take_damage()
+/obj/structure/window/crescent/take_damage()
 	return
 
-/obj/structure/window/reinforced/crescent/shatter()
+/obj/structure/window/crescent/shatter()
 	return
 
 /obj/machinery/button/windowtint
@@ -586,7 +538,7 @@
 	active = !active
 	update_icon()
 
-	for(var/obj/structure/window/reinforced/polarized/W in range(src,range))
+	for(var/obj/structure/window/polarized/W in range(src,range))
 		if (W.id == src.id || !W.id)
 			spawn(0)
 				W.toggle()

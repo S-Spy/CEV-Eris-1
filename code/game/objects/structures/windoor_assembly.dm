@@ -1,5 +1,5 @@
 /* Windoor (window door) assembly -Nodrak
- * Step 1: Create a windoor out of rglass
+ * Step 1: Create a windoor out of glass
  * Step 2: Add r-glass to the assembly to make a secure windoor (Optional)
  * Step 3: Rotate or Flip the assembly to face and open the way you want
  * Step 4: Wrench the assembly in place
@@ -105,7 +105,7 @@ obj/structure/windoor_assembly/Destroy()
 			if(state == "01" && !anchored)
 				if(I.use_tool(user, src, WORKTIME_FAST, tool_type, FAILCHANCE_NORMAL, required_stat = STAT_MEC))
 					user << SPAN_NOTICE("You dissasembled the windoor assembly!")
-					new /obj/item/stack/material/glass/reinforced(get_turf(src), 5)
+					new /obj/item/stack/material/glass(get_turf(src), 5)
 					if(secure)
 						PoolOrNew(/obj/item/stack/rods, list(get_turf(src), 4))
 					qdel(src)

@@ -75,7 +75,7 @@
 						icon_state = "3b"
 					else
 						icon_state = "3"
-					new /obj/item/stack/material/glass/reinforced( loc, 2 )
+					new /obj/item/stack/material/glass( loc, 2 )
 					return
 			return
 
@@ -148,7 +148,7 @@
 						user << SPAN_NOTICE("You add cables to the frame.")
 				return
 		if(3)
-			if(istype(I, /obj/item/stack/material) && I.get_material_name() == "rglass")
+			if(istype(I, /obj/item/stack/material) && I.get_material_name() == MATERIAL_GLASS)
 				var/obj/item/stack/RG = I
 				if (RG.get_amount() < 2)
 					user << SPAN_WARNING("You need two sheets of glass to put in the glass panel.")

@@ -29,9 +29,9 @@
 							health = maxhealth
 							update_icon()
 					return
-		else if(istype(I,/obj/item/stack/material/glass/reinforced))
+		else if(istype(I,/obj/item/stack/material/glass))
 			if(!have_glass)
-				var/obj/item/stack/material/glass/reinforced/G = I
+				var/obj/item/stack/material/glass/G = I
 				if(G.get_amount() >= 2)
 					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					user << SPAN_NOTICE("You start to put the glass into [src]...")

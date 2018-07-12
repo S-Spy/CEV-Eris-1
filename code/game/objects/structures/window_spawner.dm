@@ -68,31 +68,21 @@
 /obj/effect/wingrille_spawn/proc/handle_grille_spawn(var/obj/structure/grille/G)
 	return
 
-/obj/effect/wingrille_spawn/reinforced
-	name = "reinforced window grille spawner"
-	icon_state = "r-wingrille"
-	win_path = /obj/structure/window/reinforced
-
-/obj/effect/wingrille_spawn/reinforced/crescent
+/obj/effect/wingrille_spawn/crescent
 	name = "Crescent window grille spawner"
-	win_path = /obj/structure/window/reinforced/crescent
+	win_path = /obj/structure/window/crescent
 
 /obj/effect/wingrille_spawn/plasma
 	name = "plasma window grille spawner"
 	icon_state = "p-wingrille"
 	win_path = /obj/structure/window/plasmabasic
 
-/obj/effect/wingrille_spawn/reinforced_plasma
-	name = "reinforced plasma window grille spawner"
-	icon_state = "pr-wingrille"
-	win_path = /obj/structure/window/reinforced/plasma
-
-/obj/effect/wingrille_spawn/reinforced/polarized
+/obj/effect/wingrille_spawn/polarized
 	name = "polarized window grille spawner"
 	color = "#444444"
-	win_path = /obj/structure/window/reinforced/polarized
+	win_path = /obj/structure/window/polarized
 	var/id
 
-/obj/effect/wingrille_spawn/reinforced/polarized/handle_window_spawn(var/obj/structure/window/reinforced/polarized/P)
+/obj/effect/wingrille_spawn/polarized/handle_window_spawn(var/obj/structure/window/polarized/P)
 	if(id)
 		P.id = id

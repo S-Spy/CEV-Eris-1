@@ -2,9 +2,7 @@
 
 #define MATERIAL_STEEL "steel"
 #define MATERIAL_GLASS "glass"
-#define MATERIAL_RGLASS "rglass"
 #define MATERIAL_PLASMAGLASS "borosilicate glass"
-#define MATERIAL_RPLASMAGLASS "reinforced borosilicate glass"
 #define MATERIAL_SILVER "silver"
 #define MATERIAL_GOLD "gold"
 #define MATERIAL_PLASMA "plasma"

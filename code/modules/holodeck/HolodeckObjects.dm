@@ -122,18 +122,18 @@
 	icon_state = "boxing"
 	item_state = "boxing"
 
-/obj/structure/window/reinforced/holowindow/Destroy()
+/obj/structure/window/basic/holowindow/Destroy()
 	. = ..()
 
-/obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/window/basic/holowindow/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W) || W.flags & NOBLUDGEON)
 		return
 
 	if(istype(W, /obj/item/weapon/tool/screwdriver))
 		user << (SPAN_NOTICE("It's a holowindow, you can't unfasten it!"))
-	else if(istype(W, /obj/item/weapon/tool/crowbar) && reinf && state <= 1)
+	else if(istype(W, /obj/item/weapon/tool/crowbar) && state <= 1)
 		user << (SPAN_NOTICE("It's a holowindow, you can't pry it!"))
-	else if(istype(W, /obj/item/weapon/tool/wrench) && !anchored && (!state || !reinf))
+	else if(istype(W, /obj/item/weapon/tool/wrench) && !anchored && !state)
 		user << (SPAN_NOTICE("It's a holowindow, you can't dismantle it!"))
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
@@ -147,14 +147,14 @@
 		..()
 	return
 
-/obj/structure/window/reinforced/holowindow/shatter(var/display_message = 1)
+/obj/structure/window/basic/holowindow/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
 	return
 
-/obj/structure/window/reinforced/holowindow/disappearing/Destroy()
+/obj/structure/window/basic/holowindow/disappearing/Destroy()
 	. = ..()
 
 /obj/machinery/door/window/holowindoor/Destroy()
@@ -380,7 +380,7 @@
 
 	eventstarted = 1
 
-	for(var/obj/structure/window/reinforced/holowindow/disappearing/W in currentarea)
+	for(var/obj/structure/window/basic/holowindow/disappearing/W in currentarea)
 		qdel(W)
 
 	for(var/mob/M in currentarea)
