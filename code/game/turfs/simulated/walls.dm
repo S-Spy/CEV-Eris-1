@@ -10,6 +10,8 @@
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
+	var/maxHealth = 550
+
 	var/damage = 0
 	var/damage_overlay = 0
 	var/global/damage_overlays[16]
@@ -99,7 +101,7 @@
 	if(!damage)
 		user << SPAN_NOTICE("It looks fully intact.")
 	else
-		var/dam = damage / material.integrity
+		var/dam = damage / maxHealth
 		if(dam <= 0.3)
 			user << SPAN_WARNING("It looks slightly damaged.")
 		else if(dam <= 0.6)
@@ -134,9 +136,7 @@
 	return
 
 /turf/simulated/wall/proc/update_damage()
-	var/cap = material.integrity
-	if(reinf_material)
-		cap += reinf_material.integrity
+	var/cap = maxHealth
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		cap = cap / 10
