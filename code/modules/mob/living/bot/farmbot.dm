@@ -268,7 +268,7 @@
 	playsound(loc, "robot_talk_heavy", 100, 2, 0)
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/weapon/material/minihoe(Tsec)
+	new /obj/item/weapon/minihoe(Tsec)
 	new /obj/item/weapon/reagent_containers/glass/bucket(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/device/scanner/analyzer/plant_analyzer(Tsec)
@@ -356,7 +356,7 @@
 		user.remove_from_mob(W)
 		qdel(W)
 
-	else if((istype(W, /obj/item/weapon/material/minihoe)) && (build_step == 2))
+	else if((istype(W, /obj/item/weapon/minihoe)) && (build_step == 2))
 		build_step++
 		user << "You add a minihoe to [src]."
 		playsound(src.loc, 'sound/effects/insert.ogg', 50, 1)

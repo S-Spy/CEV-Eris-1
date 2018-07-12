@@ -1,29 +1,32 @@
-/obj/item/weapon/material/kitchen
+/obj/item/weapon/kitchen
 	icon = 'icons/obj/kitchen.dmi'
 
 /*
  * Utensils
  */
-/obj/item/weapon/material/kitchen/utensil
+/obj/item/weapon/kitchen/utensil
+	force = 5
 	w_class = ITEM_SIZE_TINY
-	thrown_force_divisor = 1
+	throwforce = 5
+	throw_speed = 3
+	throw_range = 5
+	flags = CONDUCT
 	origin_tech = "materials=1"
 	attack_verb = list("attacked", "stabbed", "poked")
-	sharp = 1
-	edge = 1
-	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
-	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
+	sharp = FALSE
+	edge = TRUE
+
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
 
-/obj/item/weapon/material/kitchen/utensil/New()
+/obj/item/weapon/kitchen/utensil/New()
 	..()
 	if (prob(60))
 		src.pixel_y = rand(0, 4)
 	create_reagents(5)
 	return
 
-/obj/item/weapon/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/weapon/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M))
 		return ..()
 
@@ -53,40 +56,33 @@
 		user << SPAN_WARNING("You don't have anything on \the [src].")	//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
 		return
 
-/obj/item/weapon/material/kitchen/utensil/fork
+/obj/item/weapon/kitchen/utensil/fork
 	name = "fork"
 	desc = "It's a fork. Sure is pointy."
 	icon_state = "fork"
 
-/obj/item/weapon/material/kitchen/utensil/fork/plastic
-	default_material = MATERIAL_PLASTIC
-
-/obj/item/weapon/material/kitchen/utensil/spoon
+/obj/item/weapon/kitchen/utensil/spoon
 	name = "spoon"
 	desc = "It's a spoon. You can see your own upside-down face in it."
 	icon_state = "spoon"
 	attack_verb = list("attacked", "poked")
-	edge = 0
-	sharp = 0
-	force_divisor = 0.1 //2 when wielded with weight 20 (steel)
-
-/obj/item/weapon/material/kitchen/utensil/spoon/plastic
-	default_material = MATERIAL_PLASTIC
 
 /*
  * Rolling Pins
  */
 
-/obj/item/weapon/material/kitchen/rollingpin
+/obj/item/weapon/kitchen/rollingpin
 	name = "rolling pin"
 	desc = "Used to knock out the Bartender."
 	icon_state = "rolling_pin"
+	force = 8
+	throwforce = 10
+	throw_speed = 2
+	throw_range = 7
+	w_class = ITEM_SIZE_NORMAL
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
-	default_material = "wood"
-	force_divisor = 0.7 // 10 when wielded with weight 15 (wood)
-	thrown_force_divisor = 1 // as above
 
-/obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/weapon/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
 		user << SPAN_WARNING("\The [src] slips out of your hand and hits your head.")
 		user.drop_from_inventory(src)

@@ -17,7 +17,7 @@
 
 /obj/item/weapon/cane/concealed/New()
 	..()
-	var/obj/item/weapon/material/butterfly/switchblade/temp_blade = new(src)
+	var/obj/item/weapon/butterfly/switchblade/temp_blade = new(src)
 	concealed_blade = temp_blade
 	temp_blade.attack_self()
 
@@ -38,7 +38,7 @@
 	else
 		..()
 
-/obj/item/weapon/cane/concealed/attackby(var/obj/item/weapon/material/butterfly/W, var/mob/user)
+/obj/item/weapon/cane/concealed/attackby(var/obj/item/weapon/butterfly/W, var/mob/user)
 	if(!src.concealed_blade && istype(W))
 		user.visible_message(
 			SPAN_WARNING("[user] has sheathed \a [W] into \his [src]!"),

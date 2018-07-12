@@ -17,4 +17,4 @@
 	new /obj/item/weapon/deck/tarot(src)
 	for (var/i in 1 to 10)
 		new /obj/item/weapon/implant/core_implant/cruciform(src)
-	new /obj/item/weapon/material/knife/neotritual(src)
+	new /obj/item/weapon/knife/neotritual(src)

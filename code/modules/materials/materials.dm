@@ -6,7 +6,7 @@
 
 	PATHS THAT USE DATUMS
 		turf/simulated/wall
-		obj/item/weapon/material
+		obj/item/weapon
 		obj/structure/barricade
 		obj/item/stack/material
 		obj/structure/table
@@ -118,8 +118,7 @@ var/list/name_to_material
 	var/list/window_options = list()
 
 	// Damage values.
-	var/hardness = 60            // Prob of wall destruction by hulk, used for edge damage in weapons.
-	var/weight = 20              // Determines blunt damage/throwforce for weapons.
+	var/hardness = 60            // Prob of wall destruction by hulk.
 
 	// Noise when someone is faceplanted onto a table made of this material.
 	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
@@ -175,10 +174,6 @@ var/list/name_to_material
 /material/proc/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
 	return 0
 
-// Weapons handle applying a divisor for this value locally.
-/material/proc/get_blunt_damage()
-	return weight //todo
-
 // Return the matter comprising this material.
 /material/proc/get_matter()
 	var/list/temp_matter = list()
@@ -188,10 +183,6 @@ var/list/name_to_material
 	else
 		temp_matter[name] = 1
 	return temp_matter
-
-// As above.
-/material/proc/get_edge_damage()
-	return hardness //todo
 
 // Snowflakey, only checked for alien doors at the moment.
 /material/proc/can_open_material_door(var/mob/living/user)
@@ -226,7 +217,7 @@ var/list/name_to_material
 // As above.
 /material/proc/place_shard(var/turf/target)
 	if(shard_type)
-		return new /obj/item/weapon/material/shard(target, src.name)
+		return new /obj/item/weapon/shard(target, src.name)
 
 // Used by walls and weapons to determine if they break or not.
 /material/proc/is_brittle()
@@ -243,7 +234,6 @@ var/list/name_to_material
 	icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	icon_colour = "#007A00"
-	weight = 22
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	door_icon_base = "stone"
 
@@ -263,7 +253,6 @@ var/list/name_to_material
 	name = "gold"
 	stack_type = /obj/item/stack/material/gold
 	icon_colour = "#EDD12F"
-	weight = 24
 	hardness = 40
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
@@ -277,7 +266,6 @@ var/list/name_to_material
 	name = "silver"
 	stack_type = /obj/item/stack/material/silver
 	icon_colour = "#D1E6E3"
-	weight = 22
 	hardness = 50
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	sheet_singular_name = "ingot"
@@ -320,7 +308,6 @@ var/list/name_to_material
 	icon_reinf = "reinf_stone"
 	icon_colour = "#D9C179"
 	shard_type = SHARD_STONE_PIECE
-	weight = 22
 	hardness = 55
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -329,7 +316,6 @@ var/list/name_to_material
 /material/stone/marble
 	name = "marble"
 	icon_colour = "#AAAAAA"
-	weight = 26
 	hardness = 100
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
@@ -359,7 +345,6 @@ var/list/name_to_material
 	icon_colour = "#777777"
 	explosion_resistance = 25
 	hardness = 80
-	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	hitsound = 'sound/weapons/genhit.ogg'
 
@@ -381,7 +366,6 @@ var/list/name_to_material
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 30
-	weight = 15
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
 	window_options = list("One Direction" = 1, "Full Window" = 4)
@@ -471,7 +455,6 @@ var/list/name_to_material
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 40
-	weight = 30
 	stack_origin_tech = "materials=2"
 	composite_material = list(MATERIAL_STEEL = 2,MATERIAL_GLASS = 3)
 	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
@@ -499,7 +482,6 @@ var/list/name_to_material
 	composite_material = list() //todo
 	created_window = /obj/structure/window/reinforced/plasma
 	hardness = 40
-	weight = 30
 	//stack_origin_tech = list(TECH_MATERIAL = 2)
 	//composite_material = list() //todo
 	rod_product = null
@@ -512,7 +494,6 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#CCCCCC"
 	hardness = 10
-	weight = 12
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 
@@ -548,7 +529,6 @@ var/list/name_to_material
 	name = "platinum"
 	stack_type = /obj/item/stack/material/platinum
 	icon_colour = "#9999FF"
-	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -557,7 +537,6 @@ var/list/name_to_material
 	name = "iron"
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5C5454"
-	weight = 22
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
@@ -572,7 +551,6 @@ var/list/name_to_material
 	melting_point = 6000       // Hull plating.
 	explosion_resistance = 200 // Hull plating.
 	hardness = 500
-	weight = 500
 
 /material/wood
 	name = "wood"
@@ -584,7 +562,6 @@ var/list/name_to_material
 	shard_type = SHARD_SPLINTER
 	shard_can_repair = 0 // you can't weld splinters back into planks
 	hardness = 15
-	weight = 18
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288
 	stack_origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
@@ -610,7 +587,6 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#AAAAAA"
 	hardness = 1
-	weight = 1
 	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
 	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
 	stack_origin_tech = list(TECH_MATERIAL = 1)

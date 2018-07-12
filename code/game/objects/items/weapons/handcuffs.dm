@@ -152,7 +152,7 @@ var/last_chew = 0
 	if(istype(I, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = I
 		if (R.use(1))
-			var/obj/item/weapon/material/wirerod/W = new(get_turf(user))
+			var/obj/item/weapon/wirerod/W = new(get_turf(user))
 			user.put_in_hands(W)
 			user << SPAN_NOTICE("You wrap the cable restraint around the top of the rod.")
 			qdel(src)

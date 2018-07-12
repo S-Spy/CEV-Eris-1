@@ -1,56 +1,59 @@
-/obj/item/weapon/material/harpoon
+/obj/item/weapon/harpoon
 	name = "harpoon"
-	sharp = 1
-	edge = 1
+	flags = CONDUCT
+	sharp = TRUE
+	edge = TRUE
 	desc = "Tharr she blows!"
 	icon_state = "harpoon"
 	item_state = "harpoon"
-	force_divisor = 0.3 // 18 with hardness 60 (steel)
+	force = 20
+	throwforce = 15
+	w_class = 3
 	attack_verb = list("jabbed","stabbed","ripped")
 
-/obj/item/weapon/material/hatchet
+/obj/item/weapon/hatchet
 	name = "hatchet"
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hatchet"
-	force_divisor = 0.4 // 24 with hardness 60 (steel)
-	thrown_force_divisor = 0.75 // 15 with weight 20 (steel)
+	force = 12
 	w_class = ITEM_SIZE_SMALL
-	sharp = 1
-	edge = 1
+	throwforce = 15
+	throw_speed = 4
+	throw_range = 4
+	sharp = TRUE
+	edge = TRUE
 	origin_tech = "materials=2;combat=1"
 	attack_verb = list("chopped", "torn", "cut")
-	applies_material_colour = 0
 	tool_qualities = list(QUALITY_CUTTING = 20)
 
-/obj/item/weapon/material/hatchet/tacknife
+/obj/item/weapon/hatchet/tacknife
 	name = "tactical knife"
 	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Space."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "tacknife"
 	item_state = "knife"
 	attack_verb = list("stabbed", "chopped", "cut")
-	applies_material_colour = 1
 
-/obj/item/weapon/material/minihoe // -- Numbers
+/obj/item/weapon/minihoe // -- Numbers
 	name = "mini hoe"
 	desc = "It's used for removing weeds or scratching your back."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hoe"
 	item_state = "hoe"
-	force_divisor = 0.25 // 5 with weight 20 (steel)
-	thrown_force_divisor = 0.25 // as above
+	force = 5
+	throwforce = 7
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
 
-/obj/item/weapon/material/scythe
+/obj/item/weapon/scythe
 	icon_state = "scythe0"
 	name = "scythe"
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
-	force_divisor = 0.275 // 16 with hardness 60 (steel)
-	thrown_force_divisor = 0.25 // 5 with weight 20 (steel)
-	sharp = 1
-	edge = 1
+	force = 13
+	throwforce = 5
+	sharp = TRUE
+	edge = TRUE
 	throw_speed = 1
 	throw_range = 3
 	w_class = ITEM_SIZE_LARGE

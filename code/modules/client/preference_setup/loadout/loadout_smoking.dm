@@ -15,5 +15,5 @@
 	path = /obj/item/weapon/flame/lighter/zippo
 
 /datum/gear/ashtray
-	display_name = "ashtray, plastic"
-	path = /obj/item/weapon/material/ashtray/plastic
+	display_name = "ashtray"
+	path = /obj/item/ashtray

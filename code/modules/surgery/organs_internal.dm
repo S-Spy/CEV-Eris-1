@@ -334,8 +334,8 @@
 // /datum/surgery_step/ribcage/heart/cut
 //	allowed_tools = list(
 //	/obj/item/weapon/tool/scalpel = 100,		\
-//	/obj/item/weapon/material/knife = 75,	\
-//	/obj/item/weapon/material/shard = 50, 		\
+//	/obj/item/weapon/knife = 75,	\
+//	/obj/item/weapon/shard = 50, 		\
 //	)
 
 //	min_duration = 30

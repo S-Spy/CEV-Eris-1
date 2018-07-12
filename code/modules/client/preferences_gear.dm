@@ -970,13 +970,13 @@ var/global/list/gear_datums = list()
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
-	path = /obj/item/weapon/material/ashtray/plastic
+	path = /obj/item/weapon/ashtray/plastic
 	sort_category = "misc"
 	cost = 1
 
 /datum/gear/boot_knife
 	display_name = "boot knife"
-	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
+	path = /obj/item/weapon/kitchen/utensil/knife/boot
 	sort_category = "misc"
 	cost = 3
 

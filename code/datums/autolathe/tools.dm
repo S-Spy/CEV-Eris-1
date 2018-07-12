@@ -68,19 +68,19 @@
 
 /datum/autolathe/recipe/tool/knife
 	name = "kitchen knife"
-	path = /obj/item/weapon/material/knife
+	path = /obj/item/weapon/knife
 
 /datum/autolathe/recipe/tool/tacknife
 	name = "tactical knife"
-	path = /obj/item/weapon/material/hatchet/tacknife
+	path = /obj/item/weapon/hatchet/tacknife
 
 /datum/autolathe/recipe/tool/hatchet
 	name = "hatchet"
-	path = /obj/item/weapon/material/hatchet
+	path = /obj/item/weapon/hatchet
 
 /datum/autolathe/recipe/tool/minihoe
 	name = "mini hoe"
-	path = /obj/item/weapon/material/minihoe
+	path = /obj/item/weapon/minihoe
 
 /datum/autolathe/recipe/tool/shovel
 	name = "shovel"

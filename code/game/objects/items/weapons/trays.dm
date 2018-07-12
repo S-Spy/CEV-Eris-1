@@ -140,7 +140,7 @@
 /obj/item/weapon/tray/var/cooldown = 0	//shield bash cooldown. based on world.time
 
 /obj/item/weapon/tray/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/material/kitchen/rollingpin))
+	if(istype(W, /obj/item/weapon/kitchen/rollingpin))
 		if(cooldown < world.time - 25)
 			user.visible_message(SPAN_WARNING("[user] bashes [src] with [W]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)

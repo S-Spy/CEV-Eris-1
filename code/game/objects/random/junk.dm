@@ -3,8 +3,8 @@
 	icon_state = "junk-black"
 
 /obj/random/junk/item_to_spawn()
-	return pick(prob(5);/obj/item/weapon/material/shard,\
-				prob(5);/obj/item/weapon/material/shard/shrapnel,\
+	return pick(prob(5);/obj/item/weapon/shard,\
+				prob(5);/obj/item/weapon/shard/shrapnel,\
 				prob(3);/obj/item/stack/material/cardboard,\
 				prob(3);/obj/item/weapon/storage/box/lights/mixed,\
 				prob(4);/obj/item/weapon/storage/box/matches,\

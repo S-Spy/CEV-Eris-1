@@ -82,8 +82,8 @@ var/list/solars_list = list()
 		if(!(stat & BROKEN))
 			broken()
 		else
-			new /obj/item/weapon/material/shard(src.loc)
-			new /obj/item/weapon/material/shard(src.loc)
+			new /obj/item/weapon/shard(src.loc)
+			new /obj/item/weapon/shard(src.loc)
 			qdel(src)
 			return
 	return
@@ -144,13 +144,13 @@ var/list/solars_list = list()
 	switch(severity)
 		if(1.0)
 			if(prob(15))
-				new /obj/item/weapon/material/shard( src.loc )
+				new /obj/item/weapon/shard( src.loc )
 			qdel(src)
 			return
 
 		if(2.0)
 			if (prob(25))
-				new /obj/item/weapon/material/shard( src.loc )
+				new /obj/item/weapon/shard( src.loc )
 				qdel(src)
 				return
 
@@ -412,7 +412,7 @@ var/list/solars_list = list()
 			if (src.stat & BROKEN)
 				user << SPAN_NOTICE("The broken glass falls out.")
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/material/shard( src.loc )
+				new /obj/item/weapon/shard( src.loc )
 				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
 				for (var/obj/C in src)
 					C.loc = src.loc

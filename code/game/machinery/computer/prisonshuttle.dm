@@ -39,7 +39,7 @@ var/prison_shuttle_timeleft = 0
 
 				if (src.stat & BROKEN)
 					user << SPAN_NOTICE("The broken glass falls out.")
-					new /obj/item/weapon/material/shard( src.loc )
+					new /obj/item/weapon/shard( src.loc )
 					A.state = 3
 					A.icon_state = "3"
 				else

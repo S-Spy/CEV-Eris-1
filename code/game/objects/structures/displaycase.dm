@@ -13,7 +13,7 @@
 /obj/structure/displaycase/ex_act(severity)
 	switch(severity)
 		if (1)
-			new /obj/item/weapon/material/shard( src.loc )
+			new /obj/item/weapon/shard( src.loc )
 			if (occupied)
 				new /obj/item/weapon/gun/energy/captain( src.loc )
 				occupied = 0
@@ -39,7 +39,7 @@
 		if (!( src.destroyed ))
 			src.density = 0
 			src.destroyed = 1
-			new /obj/item/weapon/material/shard( src.loc )
+			new /obj/item/weapon/shard( src.loc )
 			playsound(src, "shatter", 70, 1)
 			update_icon()
 	else

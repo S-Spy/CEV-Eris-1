@@ -101,12 +101,12 @@
 	if(health <= 0)
 		stat |= BROKEN
 		playsound(loc, 'sound/effects/Glassbr3.ogg', 75, 1)
-		new /obj/item/weapon/material/shard(src.loc)
+		new /obj/item/weapon/shard(src.loc)
 	update_icon()
 
 /obj/machinery/door/blast/shutters/glass/Destroy()
 	playsound(loc, 'sound/effects/Glassbr3.ogg', 75, 1)
-	new /obj/item/weapon/material/shard(src.loc)
+	new /obj/item/weapon/shard(src.loc)
 	return ..()
 
 /obj/machinery/door/blast/shutters/glass/update_icon()

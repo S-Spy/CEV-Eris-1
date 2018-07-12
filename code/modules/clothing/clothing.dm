@@ -385,10 +385,10 @@ BLIND     // can't see anything
 		..()
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if(can_hold_knife && istype(I, /obj/item/weapon/material/shard) || \
-	 istype(I, /obj/item/weapon/material/butterfly) || \
-	 istype(I, /obj/item/weapon/material/kitchen/utensil) || \
-	 istype(I, /obj/item/weapon/material/hatchet/tacknife))
+	if(can_hold_knife && istype(I, /obj/item/weapon/shard) || \
+	 istype(I, /obj/item/weapon/butterfly) || \
+	 istype(I, /obj/item/weapon/kitchen/utensil) || \
+	 istype(I, /obj/item/weapon/hatchet/tacknife))
 		if(holding)
 			user << SPAN_WARNING("\The [src] is already holding \a [holding].")
 			return
