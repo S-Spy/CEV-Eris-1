@@ -309,8 +309,6 @@
 			if (istype(material, /material/glass))
 				for(var/i = 1 to 4)
 					I = image(icon, "glass_[connections[i]]", dir = 1<<(i-1))
-					if(material.icon_colour)
-						I.color = material.icon_colour
 					overlays += I
 
 			else if (istype(material, /material/wood))
@@ -321,7 +319,6 @@
 			else
 				for(var/i = 1 to 4)
 					I = image(icon, "[material.icon_base]_[connections[i]]", dir = 1<<(i-1))
-					if(material.icon_colour) I.color = material.icon_colour
 					I.alpha = 255 * material.opacity
 					overlays += I
 
@@ -329,7 +326,6 @@
 		if(reinforced)
 			for(var/i = 1 to 4)
 				I = image(icon, "[reinforced.icon_reinf]_[connections[i]]", dir = 1<<(i-1))
-				I.color = material.icon_colour
 				I.alpha = 255 * reinforced.opacity
 				overlays += I
 
@@ -361,7 +357,6 @@
 				overlays += I
 			else
 				var/image/I = image(icon, "[material.icon_base]_flip[type]")
-				I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
 				overlays += I
 			name = "[material.display_name] table"
@@ -370,7 +365,6 @@
 
 		if(reinforced)
 			var/image/I = image(icon, "[reinforced.icon_reinf]_flip[type]")
-			I.color = reinforced.icon_colour
 			I.alpha = 255 * reinforced.opacity
 			overlays += I
 

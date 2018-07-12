@@ -27,7 +27,6 @@
 		icon_base = material.door_icon_base
 	hitsound = material.hitsound
 	name = "[material.display_name] door"
-	color = material.icon_colour
 	if(material.opacity < 0.5)
 		set_opacity(0)
 	else

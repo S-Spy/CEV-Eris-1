@@ -55,7 +55,6 @@
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]-over"
 		if(isnull(stool_cache[padding_cache_key]))
 			var/image/I =  image(icon, "[base_icon]_padding_over")
-			I.color = padding_material.icon_colour
 			I.layer = FLY_LAYER
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
@@ -65,7 +64,6 @@
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
 			I.layer = ABOVE_MOB_LAYER
-			I.color = padding_material.icon_colour
 			stool_cache[cache_key] = I
 		overlays |= stool_cache[cache_key]
 
@@ -109,7 +107,6 @@
 	icon_state = "shuttle_chair"
 	color = null
 	base_icon = "shuttle_chair"
-	applies_material_colour = 0
 
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
@@ -212,7 +209,6 @@
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
 	icon_state = "wooden_chair"
-	applies_material_colour = 0
 
 /obj/structure/bed/chair/wood/update_icon()
 	return

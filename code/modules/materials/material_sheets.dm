@@ -9,7 +9,6 @@
 
 	var/default_type = MATERIAL_STEEL
 	var/material/material
-	var/apply_colour //temp pending icon rewrite
 
 /obj/item/stack/material/Initialize()
 	. = ..()
@@ -26,9 +25,6 @@
 	stacktype = material.stack_type
 	if(islist(material.stack_origin_tech))
 		origin_tech = material.stack_origin_tech.Copy()
-
-	if(apply_colour)
-		color = material.icon_colour
 
 	if(material.conductive)
 		flags |= CONDUCT
@@ -74,7 +70,6 @@
 	name = "iron"
 	icon_state = "sheet-silver"
 	default_type = MATERIAL_IRON
-	apply_colour = 1
 
 /obj/item/stack/material/sandstone
 	name = "sandstone brick"
@@ -133,13 +128,11 @@
 	name = "tritium"
 	icon_state = "sheet-silver"
 	default_type = MATERIAL_TRITIUM
-	apply_colour = 1
 
 /obj/item/stack/material/osmium
 	name = "osmium"
 	icon_state = "sheet-silver"
 	default_type = MATERIAL_OSMIUM
-	apply_colour = 1
 
 /obj/item/stack/material/steel
 	name = MATERIAL_STEEL
