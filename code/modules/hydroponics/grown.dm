@@ -313,6 +313,18 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/libertycap
 	plantname = "libertycap"
 
+/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/shepardmush
+	plantname = "shepardmushrooms"
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/shepardmush/Process()
+	var/list/targets = list()			//list of primary targets
+
+	for(var/mob/M in mobs_in_view(world.view, src))
+		assign_the_target(M, targets)
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/shepardmush/proc/assign_the_target()
+
+
 /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
 	plantname = "ambrosia"
 

@@ -30,6 +30,7 @@
 	name = "plant"
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "blank"
+	var/list/connected_zlevels //cached for checking if we someone is obseving us so we should process
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/New(var/newloc,var/datum/seed/newseed)
 	..()
@@ -39,7 +40,17 @@
 	health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
 	pixel_y = rand(-5,5)
+	pixel_x = rand(-5,5)
+	if(seed)
+		name = seed.display_name
 	check_health()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize()
+	. = ..()
+	connected_zlevels = GetConnectedZlevels(z)
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()
+	..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/remove_dead()
 	..()
@@ -57,8 +68,6 @@
 	if(!seed)
 		qdel(src)
 		return
-	else if(name=="plant")
-		name = seed.display_name
 	..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Destroy()

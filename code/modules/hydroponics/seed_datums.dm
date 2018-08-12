@@ -494,6 +494,13 @@
 	set_trait(TRAIT_PLANT_COLOUR,"#EFFF8A")
 	set_trait(TRAIT_PLANT_ICON,"mushroom7")
 
+/datum/seed/mushroom/glowshroom/shepard_mushroom
+	name = "shepardmusroom"
+	seed_name = "shepardmusroom"
+	display_name = "shepardmusroom"
+	mutants = null
+	chems = list("radium" = list(1,20))
+
 /datum/seed/mushroom/plastic
 	name = "plastic"
 	seed_name = "plastellium"
